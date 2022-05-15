@@ -10,7 +10,7 @@ Your own digital garden, powered by [Astro](https://astro.build).
 - Search for nodes and headings
 - Blazingly(?) fast (thanks to Astro!)
 - Light and Dark modes that switch according to device theme
-- Support for [[Docs/Wikilinks|Wikilinks]]
+- Support for Wikilinks
 - Customizable by default, BYOC (bring your own colors)!
 - Modular Code (probably)
 - and much more...!
