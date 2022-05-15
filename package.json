@@ -1,7 +1,7 @@
 {
   "name": "@retronav/thicket",
   "description": "Components and utilities used by Thicket",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publishConfig": {
     "access": "public"
   },
