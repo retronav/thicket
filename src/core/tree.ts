@@ -25,8 +25,7 @@ export class SidebarNode<T extends {} = unknown> {
     public readonly children: SidebarNode[] = [],
     /** Custom mutable data, if any. */
     public data?: T
-  ) {
-  }
+  ) {}
 }
 
 /**

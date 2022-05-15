@@ -53,8 +53,7 @@ export class FilesystemBrain {
     const file = String(readFileSync(filePath));
     const backLinks = this.getBackLinks(file);
     return {
-      id: relative(resolve(this.folder), filePath)
-        .replace('.md', ''),
+      id: relative(resolve(this.folder), filePath).replace('.md', ''),
       name: filePath.split('/').pop().replace('.md', ''),
       backLinks,
     };
@@ -71,9 +70,7 @@ export class FilesystemBrain {
       extensions: [syntax({ aliasDivider: '|' })],
       mdastExtensions: [
         wikiLink.fromMarkdown({
-          pageResolver: (name: string) => [
-            name.replace(/ /g, ' '),
-          ],
+          pageResolver: (name: string) => [name.replace(/ /g, ' ')],
         }),
       ],
     });

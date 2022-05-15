@@ -39,7 +39,7 @@ const config: MarkdownRenderingOptions = {
       'rehype-autolink-headings',
       {
         behavior: 'wrap',
-        properties : { ariaLabel: "Permalink", className: ['heading-link'] },
+        properties: { ariaLabel: 'Permalink', className: ['heading-link'] },
       },
     ],
     ['rehype-shift-heading', { shift: 1 }],

@@ -30,7 +30,7 @@
       }
     );
     Object.values(headingsDOM).forEach((heading) => {
-      observer.observe(heading)
+      observer.observe(heading);
     });
   });
 </script>

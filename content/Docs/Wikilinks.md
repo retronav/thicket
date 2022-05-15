@@ -1,7 +1,7 @@
 Wikilinks is syntactic sugar to reference another node in a digital garden.
-This is mostly used in other note taking software like 
+This is mostly used in other note taking software like
 [Obsidian](https://obsidian.md). Wikilinks look like `[[Path/To/Wikilink]]`.
-Wikilinks are case-sensitive, because 
+Wikilinks are case-sensitive, because
 [URLs are case-sensitive too](https://webmasters.stackexchange.com/q/90339).
 
 # How Wikilinks work in Thicket

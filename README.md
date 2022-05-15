@@ -4,7 +4,6 @@
 
 Your own digital garden, powered by [Astro](https://astro.build).
 
-
 # Features
 
 - Network Graph
@@ -16,8 +15,8 @@ Your own digital garden, powered by [Astro](https://astro.build).
 - Modular Code (probably)
 - and much more...!
 
-Read more to know 
-[how to install Thicket](https://thicket.retronav.vercel.app/Docs/Installation) 
+Read more to know
+[how to install Thicket](https://thicket.retronav.vercel.app/Docs/Installation)
 and make your own digital garden! (yes, the docs also use Thicket!)
 
 You can also install the components and utilities used in Thicket as an NPM
