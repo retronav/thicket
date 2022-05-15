@@ -1,4 +1,4 @@
-![Screenshot of Thicket](./public/screenshot.png)
+![Screenshot of Thicket](https://github.com/retronav/thicket/raw/main/public/screenshot.png)
 
 # Thicket
 
