@@ -22,3 +22,7 @@ and make your own digital garden! (yes, the docs also use Thicket!)
 
 You can also install the components and utilities used in Thicket as an NPM
 package: `@retronav/thicket`.
+
+## Demo
+
+To experience thicket, you can visit [this link](https://thicket.retronav.vercel.app/).
