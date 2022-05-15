@@ -19,7 +19,8 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build && node scripts/fixViteAsset.mjs",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@astrojs/svelte": "^0.1.3",
