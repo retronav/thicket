@@ -1,0 +1,20 @@
+---
+import { Markdown } from 'astro/components';
+const { content, headings, title } = Astro.props;
+---
+
+<article>
+  <h1 class="title">{title}</h1>
+  <Markdown {content}>
+
+  </Markdown>
+</article>
+
+<style lang="scss">
+  article {
+    @apply <sm:max-w-full break-words p-4 sm:max-w-prose;
+    h1.title {
+      @apply mb-8 text-5xl leading-tight;
+    }
+  }
+</style>

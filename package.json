@@ -1,0 +1,59 @@
+{
+  "name": "@retronav/thicket",
+  "description": "Components and utilities used by Thicket",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Pranav Karawale",
+    "url": "https://karawale.in"
+  },
+  "license": "Apache-2.0",
+  "files": [
+    "src/components",
+    "src/core",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build && node scripts/fixViteAsset.mjs",
+    "preview": "astro preview"
+  },
+  "devDependencies": {
+    "@astrojs/svelte": "^0.1.3",
+    "@changesets/cli": "^2.22.0",
+    "@fontsource/fira-sans": "^4.5.8",
+    "@types/throttle-debounce": "^4.0.0",
+    "astro": "1.0.0-beta.26",
+    "astro-seo": "^0.5.0",
+    "fast-glob": "^3.2.11",
+    "katex": "^0.15.3",
+    "mdast-util-wiki-link": "^0.0.2",
+    "micromark-extension-wiki-link": "^0.0.4",
+    "prettier-plugin-astro": "^0.0.12",
+    "prettier-plugin-svelte": "^2.7.0",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-katex": "^6.0.2",
+    "rehype-shift-heading": "^1.0.2",
+    "rehype-slug": "^5.0.1",
+    "remark-gfm": "^3.0.1",
+    "remark-math": "^5.1.1",
+    "remark-wiki-link": "^1.0.4",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "sass": "^1.51.0",
+    "svelte": "^3.48.0",
+    "vite-plugin-windicss": "^1.8.4",
+    "windicss": "^3.5.3"
+  },
+  "peerDependencies": {
+    "svelte": "^3.48.0"
+  },
+  "dependencies": {
+    "fuse.js": "^6.6.2",
+    "throttle-debounce": "^5.0.0",
+    "vis-data": "^7.1.4",
+    "vis-network": "^9.1.2"
+  }
+}

@@ -1,0 +1,50 @@
+article {
+  @apply text-[18px] leading-normal;
+  /* This styling is applied to the markdown content. */
+  pre {
+    @apply rounded-generic p-2 my-4;
+  }
+
+  img {
+    @apply mx-auto max-w-full object-contain my-6 rounded-generic;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply my-4;
+    .heading-link {
+      @apply text-current no-underline hover:underline;
+    }
+  }
+
+  // Minor Third scale - https://type-scale.com/
+
+  h1 {
+    font-size: 2.49rem;
+  }
+
+  h2 {
+    font-size: 2.1rem;
+  }
+
+  h3 {
+    font-size: 1.73rem;
+  }
+
+  h4 {
+    font-size: 1.44rem;
+  }
+
+  h5 {
+    font-size: 1.2rem;
+  }
+
+  small,
+  .text_small {
+    font-size: 0.83rem;
+  }
+}

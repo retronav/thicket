@@ -1,0 +1,129 @@
+---
+import { resolve, join, sep } from 'path';
+import { readFile } from 'fs/promises';
+import { fsToTree, walkNode } from '../core/tree';
+import { FilesystemBrain } from '../core/brain';
+import Article from '../components/article.astro';
+import Navbar from '../components/navbar.svelte';
+import Graph from '../components/graph.svelte';
+import ToC from '../components/toc.svelte';
+import Base from '../layouts/base.astro';
+import {
+  source,
+  linkPrefix,
+  theme as windiTheme,
+  siteName,
+} from '../../site.config';
+
+export async function getStaticPaths() {
+  let nodes = await Astro.glob(`../../content/**/*.md`);
+  const nodePathOnDisk = resolve(source) + sep;
+  let headers = {};
+  nodes.map(async (node) => {
+    headers[
+      node.file
+        .replace('\\', '/')
+        .replace(nodePathOnDisk, '')
+        .replace('.md', '')
+    ] = await node.getHeaders();
+  });
+
+  return nodes.map((node) => {
+    const nodePath = node.file.replace(nodePathOnDisk, '');
+    let nodeSlug = nodePath.replace('.md', '');
+    return {
+      props: {
+        file: nodePath,
+        headers,
+        title: nodeSlug.split('/').pop(),
+      },
+      params: {
+        node: linkPrefix.slice(1) + nodeSlug,
+      },
+    };
+  });
+}
+const { node: currentURL } = Astro.params as { node: string };
+const { file, headers, title } = Astro.props;
+const content = await readFile(join(source, file));
+const tree = fsToTree(headers);
+const brain = new FilesystemBrain(source);
+
+const searchData = [];
+
+tree.forEach((node) =>
+  walkNode(node, (node) => {
+    // Fancy mechanism to open the sidebar when a nested node page is opened.
+    // This all happens server side, though.
+    if (
+      node.type === 'directory' &&
+      currentURL.startsWith(node.path.slice(1))
+    ) {
+      node.data = { active: true };
+    }
+    if (node.type === 'node') {
+      if (node.path.slice(1) === currentURL) {
+        node.data = { active: true };
+      }
+      searchData.push({
+        name: node.name,
+        path: node.path,
+        headings: node.headings,
+      });
+    }
+  })
+);
+
+const searchOptions = {
+  includeMatches: true,
+};
+---
+
+<Base {title}>
+  <main>
+    <Navbar
+      title={siteName}
+      sidebarProps={{ tree, linkPrefix }}
+      searchProps={{ data: searchData, options: searchOptions, limit: 10 }}
+      {linkPrefix}
+      client:load
+    />
+    <Article {content} headings={headers} {title} />
+    <aside>
+      <hr class="seperator" />
+      <section>
+        <h2 class="section-name">In this page</h2>
+        <ToC headings={headers[currentURL]} client:load />
+      </section>
+      <hr />
+      <section>
+        <h2 class="section-name">Network Graph</h2>
+        <Graph
+          activeNode={currentURL}
+          {brain}
+          {linkPrefix}
+          {windiTheme}
+          client:idle
+        />
+      </section>
+    </aside>
+  </main>
+</Base>
+
+<style lang="scss">
+  aside {
+    .seperator {
+      @apply lg:hidden;
+    }
+    section {
+      @apply my-4;
+      .section-name {
+        @apply p-2 uppercase text-lg;
+      }
+    }
+    @apply <lg:(col-end-3 col-start-2) p-1 lg:(h-screen overflow-y-scroll sticky);
+    :global(.graph) {
+      @apply w-xs h-xs rounded-graph mx-auto max-w-[80%] border-2 border-solid;
+    }
+  }
+</style>

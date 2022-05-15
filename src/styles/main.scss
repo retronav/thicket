@@ -1,0 +1,34 @@
+@use '@fontsource/fira-sans/index.css';
+@use './markdown.scss';
+
+body {
+  @apply bg-light-100 text-dark-900 dark:bg-dark-500 dark:text-light-100 font-sans leading-normal;
+  &.sidebar-open canvas {
+    @apply opacity-0;
+  }
+}
+
+a {
+  @apply dark:text-blue-300;
+}
+
+a:visited {
+  @apply dark:text-purple-400;
+}
+
+pre,
+code {
+  @apply font-mono;
+}
+
+main {
+  @apply <md:(grid-cols-[30%,70%]) <sm:(flex flex-col) sm:grid lg:grid-cols-[25%,50%,25%];
+
+  nav {
+    @apply <sm:w-screen md:(h-screen overflow-y-scroll) dark:bg-dark-600 bg-light-200 sm:(sticky top-0 left-0);
+  }
+
+  article {
+    @apply <lg:flex-1 md:(h-screen overflow-y-scroll) ml-4;
+  }
+}
