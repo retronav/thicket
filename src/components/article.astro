@@ -1,12 +1,48 @@
 ---
 import { Markdown } from 'astro/components';
-const { content, headings, title } = Astro.props;
+import dayjs from "dayjs";
+
+export interface Props {
+  content: string;
+  title: string;
+  frontmatter: Record<string, any>;
+  dateFormat: string;
+}
+const { content, title, frontmatter, dateFormat = 'DD MMM, YYYY' } = Astro.props as Props;
 ---
 
 <article>
   <h1 class="title">{title}</h1>
+  <aside>
+  <dl class="metadata">
+    {frontmatter.date && (
+      <dt>date</dt>
+      <dd>
+        <time datetime={frontmatter.date}>
+          {dayjs(frontmatter.date).format(dateFormat)}
+        </time>
+      </dd>
+    )}
+    {frontmatter.updated && (
+      <dt>last updated</dt>
+      <dd>
+        <time datetime={frontmatter.updated}>
+          {dayjs(frontmatter.updated).format(dateFormat)}
+        </time>
+      </dd>
+    )}
+    {frontmatter.tags && (
+      <dt>tags</dt>
+      <dd>
+        {frontmatter.tags.map((tag: string, i: number) => (
+          <a href={`/tags/${tag}`}>{tag}</a>
+          <span>{i !== frontmatter.tags.length - 1 && ', '}</span>
+        ))}
+      </dd>
+    )}  
+  </dl>
+  </aside>
   <Markdown {content}>
-
   </Markdown>
 </article>
 
@@ -15,6 +51,15 @@ const { content, headings, title } = Astro.props;
     @apply <sm:max-w-full break-words p-4 sm:max-w-prose;
     h1.title {
       @apply mb-8 text-5xl leading-tight;
+    }
+    aside dl.metadata {
+      @apply grid sm:grid-cols-[auto,1fr] content-between;
+      &:last-child {
+        @apply mb-4;
+      }
+      dd {
+        @apply sm:text-right <sm:(text-left) mb-2;
+      }
     }
   }
 </style>

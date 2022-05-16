@@ -1,10 +1,15 @@
-# What is a digital garden
+---
+tags: [garden]
+---
+
+# What is a digital garden?
 
 ## Literary Definition
 
 A Digital Garden contains a bunch of Markdown files that can link back to each
 other, creating little connections in the process that can then be seen through
-a huge [[Docs/Network Graph]]. Your just made your own web of Markdown files.
+a huge [[Docs/Network Graph|network graph]]. Your just made your own web of
+Markdown files.
 
 ## Humane definition
 

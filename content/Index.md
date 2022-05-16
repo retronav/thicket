@@ -11,6 +11,7 @@ Your own [[Digital Garden|digital garden]], powered by [Astro](https://astro.bui
 - Support for [[Docs/Wikilinks|Wikilinks]]
 - Customizable by default, BYOC (bring your own colors)!
 - Modular Code (probably)
+- Tagging nodes
 - and much more...!
 
 Read more to know [[Docs/Installation|how to install Thicket]] and make

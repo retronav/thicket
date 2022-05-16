@@ -1,3 +1,7 @@
+---
+tags: [docs]
+---
+
 # General notes
 
 ## `site.config.ts`
@@ -6,6 +10,11 @@ Thicket stores its site-wide configuration in a single file, `site.config.ts`.
 You can configure the URL where your digital garden will be hosted, the
 directory where your nodes will be stored. You can also configure the theme by
 editing the [Windi CSS](https://windicss.org) configuration.
+
+If you change the directory where the files are stored in this file, you will
+need to manually update it in `src/pages/[...node].astro`, since
+[`Astro.glob()`](https://docs.astro.build/en/reference/api-reference/#astroglob)
+does not support dynamic strings at the moment.
 
 ## `markdown.config.ts`
 

@@ -1,0 +1,102 @@
+---
+import { $, quiet } from 'zx';
+import dayjs from 'dayjs';
+import { resolve, sep } from 'path';
+import Base from '../../layouts/base.astro';
+import { source, linkPrefix, siteName } from '../../../site.config';
+
+interface NodeData {
+  title: string;
+  date: string;
+  url: string;
+}
+
+export async function getStaticPaths() {
+  const nodes = await Astro.glob('../../../content/**/*.md');
+  const tagsAndNodes = new Map<string, NodeData[]>();
+
+  await Promise.all(
+    nodes.map(async (node) => {
+      if (node.frontmatter && node.frontmatter?.tags) {
+        const tags = node.frontmatter.tags;
+        let date = node.frontmatter?.updated ?? node.frontmatter?.date;
+        if (!date) {
+          try {
+            // Get date of last commit if post has no date
+            date = (await quiet($`git log -1 --format=%cd`)).stdout;
+          } catch {
+            // Use the current date as a fallback
+            date = new Date().toISOString();
+          }
+        }
+        const metadata: NodeData = {
+          url: node.file
+            .replace(resolve(source), '')
+            .replace(sep, '/')
+            .replace('.md', '')
+            .slice(1),
+          date,
+          title: '',
+        };
+        metadata.title = metadata.url.split('/').pop();
+        tags.forEach((tag: string) => {
+          if (tagsAndNodes.has(tag)) {
+            tagsAndNodes.set(tag, tagsAndNodes.get(tag).concat(metadata));
+          } else {
+            tagsAndNodes.set(tag, [metadata]);
+          }
+        });
+      }
+    })
+  );
+  return Array.from(tagsAndNodes.entries()).map(([tag, nodes]) => {
+    return {
+      params: {
+        tag,
+      },
+      props: { nodes },
+    };
+  });
+}
+
+interface Props {
+  nodes: NodeData[];
+}
+
+const { tag } = Astro.params;
+const { nodes } = Astro.props as Props;
+---
+
+<Base title={`Tagged: ${tag}`}>
+  <nav>
+    <a href={linkPrefix}>{siteName}</a>
+  </nav>
+  <main>
+    <h1 class='title'>Tagged: {tag}</h1>
+    <ul class='list'>
+      {nodes.map((node) => (
+        <li>
+          <a href={linkPrefix + node.url}>{node.title}</a>
+          <span>
+            &nbsp;[ last updated {dayjs(node.date).format('DD MMM, YYYY')} ]
+          </span>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Base>
+
+<style>
+  nav {
+    @apply p-4 text-xl;
+  }
+  main {
+    @apply p-4;
+    h1 {
+      @apply text-4xl mb-4;
+    }
+    ul {
+      @apply text-2xl;
+    }
+  }
+</style>

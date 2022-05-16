@@ -1,3 +1,7 @@
+---
+tags: [docs]
+---
+
 A network graph shows all the nodes in a digital garden, with connecting them
 by lines. If a node references another node via a backlink, both of them are
 connected and will be shown accordingly in the network.

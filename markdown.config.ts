@@ -1,20 +1,16 @@
 import wikiLink from 'remark-wiki-link';
-import remarkMath from 'remark-math';
-import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex';
 import { join } from 'path';
-import slugify from '@sindresorhus/slugify';
 import type { MarkdownRenderingOptions } from '@astrojs/markdown-remark';
 import { linkPrefix } from './site.config';
 import { isAmbiguousUrl } from './src/core/util';
-import { h } from 'hastscript';
-import { Node, toString } from 'hast-util-to-string';
 
 //@ts-ignore Why does this requires every option even if all can be optional?
 const config: MarkdownRenderingOptions = {
   remarkPlugins: [
-    remarkGfm,
-    remarkMath,
+    'remark-gfm',
+    'remark-math',
+    'remark-frontmatter',
     [
       wikiLink,
       {

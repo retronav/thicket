@@ -13,6 +13,7 @@ Your own digital garden, powered by [Astro](https://astro.build).
 - Support for Wikilinks
 - Customizable by default, BYOC (bring your own colors)!
 - Modular Code (probably)
+- Tagging nodes
 - and much more...!
 
 Read more to know

@@ -1,3 +1,7 @@
+---
+tags: [docs]
+---
+
 # Install as a template
 
 ## Cloning the repository

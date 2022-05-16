@@ -1,3 +1,7 @@
+---
+tags: [docs]
+---
+
 Thicket compiles to a static website, so you can pretty much drop it anywhere
 which can serve static files and it can do the job.
 

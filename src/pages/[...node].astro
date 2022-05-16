@@ -16,11 +16,11 @@ import {
 } from '../../site.config';
 
 export async function getStaticPaths() {
-  let nodes = await Astro.glob(`../../content/**/*.md`);
+  const nodes = await Astro.glob(`../../content/**/*.md`);
   const nodePathOnDisk = resolve(source) + sep;
-  let headers = {};
+  let headings = {};
   nodes.map(async (node) => {
-    headers[
+    headings[
       node.file
         .replace('\\', '/')
         .replace(nodePathOnDisk, '')
@@ -34,7 +34,8 @@ export async function getStaticPaths() {
     return {
       props: {
         file: nodePath,
-        headers,
+        headings,
+        frontmatter: node.frontmatter,
         title: nodeSlug.split('/').pop(),
       },
       params: {
@@ -44,9 +45,9 @@ export async function getStaticPaths() {
   });
 }
 const { node: currentURL } = Astro.params as { node: string };
-const { file, headers, title } = Astro.props;
+const { file, headings, title, frontmatter } = Astro.props;
 const content = await readFile(join(source, file));
-const tree = fsToTree(headers);
+const tree = fsToTree(headings);
 const brain = new FilesystemBrain(source);
 
 const searchData = [];
@@ -80,7 +81,7 @@ const searchOptions = {
 ---
 
 <Base {title}>
-  <main>
+  <main class="node">
     <Navbar
       title={siteName}
       sidebarProps={{ tree, linkPrefix }}
@@ -88,12 +89,12 @@ const searchOptions = {
       {linkPrefix}
       client:load
     />
-    <Article {content} headings={headers} {title} />
+    <Article {content} {title} {frontmatter} />
     <aside>
       <hr class="seperator" />
       <section>
         <h2 class="section-name">In this page</h2>
-        <ToC headings={headers[currentURL]} client:load />
+        <ToC headings={headings[currentURL]} client:load />
       </section>
       <hr />
       <section>

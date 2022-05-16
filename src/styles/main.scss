@@ -21,7 +21,7 @@ code {
   @apply font-mono;
 }
 
-main {
+main.node {
   @apply <md:(grid-cols-[30%,70%]) <sm:(flex flex-col) sm:grid lg:grid-cols-[25%,50%,25%];
 
   nav {

@@ -1,3 +1,7 @@
+---
+tags: [docs]
+---
+
 Wikilinks is syntactic sugar to reference another node in a digital garden.
 This is mostly used in other note taking software like
 [Obsidian](https://obsidian.md). Wikilinks look like `[[Path/To/Wikilink]]`.
