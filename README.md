@@ -25,5 +25,5 @@ package: `@retronav/thicket`.
 
 ## Demo
 
-To experience thicket, you can visit
+To experience Thicket, you can visit
 [this link](https://thicket.retronav.vercel.app/).
